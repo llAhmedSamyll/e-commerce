@@ -2,7 +2,7 @@ import Link from "next/link";
 import getProducts from "../api/getProducts";
 
 export default async function AllProducts() {
-  let data = await getProducts();
+  const data = await getProducts();
 
   return (
     <>

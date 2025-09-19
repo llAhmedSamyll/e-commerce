@@ -14,7 +14,7 @@ export default function NotFound() {
           </p>
           <p className="mb-4 text-lg font-light  text-gray-400">
             Sorry, we can't find that page. You'll find lots to explore on the
-            home page.{" "}
+            home page.
           </p>
           <Link
             href="/"

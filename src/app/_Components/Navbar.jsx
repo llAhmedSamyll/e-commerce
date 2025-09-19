@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  let path = usePathname();
+  const path = usePathname();
 
   return (
     <nav className=" bg-gray-900 fixed w-full z-20 top-0 start-0  ">
