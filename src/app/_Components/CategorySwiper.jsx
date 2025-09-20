@@ -5,7 +5,6 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function CategorySwiper({ data }) {
-  console.log(data);
   return (
     <>
       <section className="container lg:hidden mx-auto mt-10">
@@ -26,7 +25,7 @@ export default function CategorySwiper({ data }) {
                   <img
                     className="object-cover size-50 rounded-3xl "
                     src={category.image}
-                    alt=""
+                    alt={category.image}
                   />
                 </div>
                 <p className="font-semibold text-center ">{category.name}</p>
@@ -54,7 +53,7 @@ export default function CategorySwiper({ data }) {
                   <img
                     className="object-cover size-50 rounded-3xl "
                     src={category.image}
-                    alt=""
+                    alt={category.image}
                   />
                   <p className="font-semibold text-center ">{category.name}</p>
                 </div>

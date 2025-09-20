@@ -1,8 +1,10 @@
 import Link from "next/link";
 import getProducts from "../api/getProducts";
+import Image from "next/image";
 
 export default async function AllProducts() {
   const data = await getProducts();
+  console.log(data)
 
   return (
     <>
@@ -15,17 +17,19 @@ export default async function AllProducts() {
             <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border group relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
               <Link href={`/products/${product.id}`}>
                 <div className="relative  border-b border-teal-400 ">
-                  <img
+                  <Image
+                    width={200}
+                    height={400}
                     className="w-full "
                     src={product.imageCover}
-                    alt="image"
+                    alt={product.title}
                   />
                   {product.priceAfterDiscount && (
                     <div className="absolute  top-0 right-0   flex justify-center items-center w-1/4">
                       <img
                         className="w-full "
                         src="/images/discount.png"
-                        alt=""
+                        alt="discount"
                       />
                     </div>
                   )}
