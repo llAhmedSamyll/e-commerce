@@ -1,7 +1,6 @@
 "use client";
 import { CategoryType } from "@/types/category.type";
 import Image from "next/image";
-import React from "react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
