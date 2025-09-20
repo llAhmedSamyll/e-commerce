@@ -8,8 +8,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 export default function MainSlider() {
   return (
     <div className="container  w-full  mx-auto md:flex ">
-      <div className=" w-full lg:w-3/4">
+      <div className="  w-full lg:w-3/4">
         <Swiper
+        className="cursor-grab"
           spaceBetween={0}
           slidesPerView={1}
           modules={[Autoplay]}
