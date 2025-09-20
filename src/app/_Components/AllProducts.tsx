@@ -1,15 +1,14 @@
 import Link from "next/link";
 import getProducts from "../api/getProducts";
 import Image from "next/image";
-
+import { ProductType } from "@/types/product.type";
 export default async function AllProducts() {
   const data = await getProducts();
-  console.log(data)
 
   return (
     <>
       <div className="container mx-auto flex   flex-wrap">
-        {data.map((product) => (
+        {data.map((product: ProductType) => (
           <div
             key={product.id}
             className=" w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 md:p-2 p-2  "

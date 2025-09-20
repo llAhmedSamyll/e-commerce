@@ -4,9 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL("https://ecommerce.routemisr.com/*/*")],
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+
   eslint: {
     ignoreDuringBuilds: true,
   },
