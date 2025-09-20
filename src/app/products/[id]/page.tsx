@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,8 +6,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import getProductDetails from "@/app/api/getProductDetails";
+import Image from "next/image";
 
-export default async function productDetails({ params }) {
+export default async function productDetails({ params } : {params: {id : string}} ) {
   const { id } = await params;
   const data = await getProductDetails(id);
 
@@ -21,9 +21,9 @@ export default async function productDetails({ params }) {
           </div>
           <Carousel className="cursor-grab rounded-2xl overflow-hidden shadow-lg ">
             <CarouselContent>
-              {data.images.map((img) => (
+              {data.images.map((img: string) => (
                 <CarouselItem key={img}>
-                  <img className="w-full" src={img} alt="product images" />
+                  <Image className="w-full" width={1000} height={1000} src={img} alt="product images" />
                 </CarouselItem>
               ))}
             </CarouselContent>

@@ -17,7 +17,7 @@ export default async function AllProducts() {
               <Link href={`/products/${product.id}`}>
                 <div className="relative  border-b border-teal-400 ">
                   <Image
-                    width={200}
+                    width={400}
                     height={400}
                     className="w-full "
                     src={product.imageCover}
@@ -25,7 +25,9 @@ export default async function AllProducts() {
                   />
                   {product.priceAfterDiscount && (
                     <div className="absolute  top-0 right-0   flex justify-center items-center w-1/4">
-                      <img
+                      <Image
+                        width={200}
+                        height={200}
                         className="w-full "
                         src="/images/discount.png"
                         alt="discount"

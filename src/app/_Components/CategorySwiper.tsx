@@ -1,10 +1,12 @@
 "use client";
+import { CategoryType } from "@/types/category.type";
+import Image from "next/image";
 import React from "react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function CategorySwiper({ data }) {
+export default function CategorySwiper({ data }: { data: CategoryType[] }) {
   return (
     <>
       <section className="container lg:hidden mx-auto mt-10">
@@ -19,10 +21,12 @@ export default function CategorySwiper({ data }) {
             modules={[Autoplay]}
             autoplay={{ delay: 1000 }}
           >
-            {data.map((category) => (
+            {data.map((category: CategoryType) => (
               <SwiperSlide key={category._id}>
                 <div className="flex flex-col justify-center  items-center    ">
-                  <img
+                  <Image
+                    width={200}
+                    height={200}
                     className="object-cover size-50 rounded-3xl "
                     src={category.image}
                     alt={category.image}
@@ -47,10 +51,12 @@ export default function CategorySwiper({ data }) {
             modules={[Autoplay]}
             autoplay={{ delay: 1000 }}
           >
-            {data.map((category) => (
-              <SwiperSlide>
+            {data.map((category: CategoryType) => (
+              <SwiperSlide key={category._id}>
                 <div className="flex flex-col justify-center   items-center  cursor-grab   ">
-                  <img
+                  <Image
+                    width={200}
+                    height={200}
                     className="object-cover size-50 rounded-3xl "
                     src={category.image}
                     alt={category.image}

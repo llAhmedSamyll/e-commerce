@@ -1,5 +1,5 @@
 import getAllCategories from "../api/getAllCategories";
-import CategorySwiper from "./CategorySwiper.tsx";
+import CategorySwiper from "./CategorySwiper";
 
 export default async function CategorySlider() {
   const { data } = await getAllCategories();
