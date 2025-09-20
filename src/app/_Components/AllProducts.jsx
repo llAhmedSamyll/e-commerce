@@ -10,7 +10,7 @@ export default async function AllProducts() {
         {data.map((product) => (
           <div
             key={product.id}
-            className=" w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 md:p-4 p-2  "
+            className=" w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 md:p-2 p-2  "
           >
             <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border group relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
               <Link href={`/products/${product.id}`}>
