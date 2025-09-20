@@ -7,7 +7,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import getProductDetails from "@/app/api/getProductDetails";
-import Image from "next/image";
 
 export default async function productDetails({ params }) {
   const { id } = await params;
@@ -24,7 +23,7 @@ export default async function productDetails({ params }) {
             <CarouselContent>
               {data.images.map((img) => (
                 <CarouselItem key={img}>
-                  <Image className="w-full" src={img} alt="product images" />
+                  <img className="w-full" src={img} alt="product images" />
                 </CarouselItem>
               ))}
             </CarouselContent>
