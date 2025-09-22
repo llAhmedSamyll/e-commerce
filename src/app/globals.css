@@ -57,8 +57,8 @@
 }
 
 body {
-  background-color: #eee;
-  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
+  background-color: #e5e5e5;
+  background-image: url(/images/light-patten.svg);
 }
 
 :root {

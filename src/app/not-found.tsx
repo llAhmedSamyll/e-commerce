@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -8,9 +9,9 @@ export default function NotFound() {
     <section className=" bg-gray-800 h-screen flex items-center w-[100%] ">
       <div className="mx-auto">
         <div className="mx-auto text-center">
-          <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-blue-500">
-            404
-          </h1>
+          <div className="mb-4 p-7">
+            <Image width={500} height={500} src="/images/error.png" alt="error" />
+          </div>
           <p className="mb-4 text-3xl tracking-tight font-bold  md:text-4xl text-white">
             Something's missing.
           </p>

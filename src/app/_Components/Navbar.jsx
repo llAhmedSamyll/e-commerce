@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -14,11 +15,19 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        ></Link>
+          className="flex w-45 items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img src="/images/logo.png" alt="logo" />
+        </Link>
 
         {/* Right section (button + toggle) */}
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <Link
+            href="/register"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+          >
+            Register
+          </Link>
           <button
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
@@ -29,13 +38,7 @@ export default function Navbar() {
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
           >
-            Register
-          </button>
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-          >
-            Signout
+            Logout
           </button>
 
           {/* Toggle button */}
