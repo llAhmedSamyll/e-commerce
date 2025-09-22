@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function Register() {
-  let router = useRouter();
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       name: "",
@@ -39,7 +39,8 @@ export default function Register() {
         router.push("/login")
       })
       .catch((err) => {
-        toast.error(err.message);
+        toast.error(err.response.data.message);
+        console.log(err)
       });
   }
 
