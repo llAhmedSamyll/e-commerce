@@ -36,10 +36,10 @@ export default function Login() {
       redirect: false,
       callbackUrl: "/",
     });
-    console.log(res);
 
-    if (res?.error === "success") {
-      toast.success(res.error);
+    if (res?.ok) {
+      toast.success("Success");
+      window.location.href = "/"
     } else {
       toast.error(res.error);
     }

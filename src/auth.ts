@@ -24,7 +24,8 @@ export const authOption: NextAuthOptions = {
           headers: { "Content-Type": "application/json" },
         });
         const payload = await response.json();
-        if (payload.message === "sucsses") {
+        console.log(payload);
+        if (payload.message === "success") {
           const decodedToken: { id: string } = jwtDecode(payload.token);
 
           return {
@@ -38,4 +39,18 @@ export const authOption: NextAuthOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user?.user;
+        token.token = user?.token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = token.user;
+      return session;
+    },
+  },
 };
