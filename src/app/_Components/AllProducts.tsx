@@ -1,5 +1,5 @@
 import Link from "next/link";
-import getProducts from "../api/getProducts";
+import getProducts from "../../api/getProducts";
 import Image from "next/image";
 import { ProductType } from "@/types/product.type";
 export default async function AllProducts() {

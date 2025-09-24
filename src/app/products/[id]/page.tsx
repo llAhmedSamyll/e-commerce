@@ -5,10 +5,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import getProductDetails from "@/app/api/getProductDetails";
+import getProductDetails from "@/api/getProductDetails";
 import Image from "next/image";
 
-export default async function productDetails({ params } : {params: {id : string}} ) {
+export default async function productDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = await params;
   const data = await getProductDetails(id);
 
@@ -23,7 +27,13 @@ export default async function productDetails({ params } : {params: {id : string}
             <CarouselContent>
               {data.images.map((img: string) => (
                 <CarouselItem key={img}>
-                  <Image className="w-full" width={1000} height={1000} src={img} alt="product images" />
+                  <Image
+                    className="w-full"
+                    width={1000}
+                    height={1000}
+                    src={img}
+                    alt="product images"
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
