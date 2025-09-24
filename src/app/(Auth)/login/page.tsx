@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { loginSchemaType, loginSchema } from "@/schema/login";
+import { signIn } from "next-auth/react";
+
 export default function Login() {
   const router = useRouter();
   const form = useForm({
@@ -28,16 +30,19 @@ export default function Login() {
   });
 
   async function handellogin(value: loginSchemaType) {
-    const response = await axios
-      .post("https://ecommerce.routemisr.com/api/v1/auth/signin", value)
-      .then((res) => {
-        toast.success(res.data.message);
-        form.reset();
-        router.push("/");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+    const res = await signIn("credentials", {
+      email: value.email,
+      password: value.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+    console.log(res);
+
+    if (res?.error === "success") {
+      toast.success(res.error);
+    } else {
+      toast.error(res.error);
+    }
   }
 
   return (

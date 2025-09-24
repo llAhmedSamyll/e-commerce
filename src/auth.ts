@@ -1,6 +1,12 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { jwtDecode } from "jwt-decode";
+
 export const authOption: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+  },
+
   providers: [
     Credentials({
       name: "Credentials",
@@ -15,12 +21,21 @@ export const authOption: NextAuthOptions = {
             email: credentials?.email,
             password: credentials?.password,
           }),
-          headers: { "Conrent-Type": "application.json" },
+          headers: { "Content-Type": "application/json" },
         });
         const payload = await response.json();
-        console.log(payload);
-        return null
+        if (payload.message === "sucsses") {
+          const decodedToken: { id: string } = jwtDecode(payload.token);
+
+          return {
+            id: decodedToken.id,
+            user: payload.user,
+            token: payload.token,
+          };
+        } else {
+          throw new Error(payload.message || "Wrong credential ");
+        }
       },
     }),
   ],
-}; 
+};
