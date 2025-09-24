@@ -5,6 +5,7 @@ import Navbar from "./_Components/Navbar";
 import Aos from "./_Components/Aos";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Toaster } from "react-hot-toast";
+import MySessionProvider from "@/MySessionProvider/MySessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,14 +32,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Toaster />
-        <Aos/>
+        <MySessionProvider>
+          <Toaster />
+          <Aos />
 
-        <div>
-          <Navbar />
-        </div>
-        <div className="mt-20"></div>
-        {children}
+          <div>
+            <Navbar />
+          </div>
+          <div className="mt-20"></div>
+          {children}
+        </MySessionProvider>
       </body>
     </html>
   );
