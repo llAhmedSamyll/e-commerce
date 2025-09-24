@@ -29,7 +29,7 @@ export default function Login() {
     shouldFocusError: true,
   });
 
-  async function handellogin(value: loginSchemaType) {
+  async function handelLogin(value: loginSchemaType) {
     const res = await signIn("credentials", {
       email: value.email,
       password: value.password,
@@ -37,12 +37,14 @@ export default function Login() {
       callbackUrl: "/",
     });
 
-    if (res?.ok) {
-      toast.success("Success");
-      window.location.href = "/"
-    } else {
-      toast.error(res.error);
-    }
+   if (res && res.ok) {
+  toast.success("Success");
+  router.push("/");
+} else if (res && res.error) {
+  toast.error(res.error);
+} else {
+  toast.error("Something went wrong");
+}
   }
 
   return (
@@ -54,7 +56,7 @@ export default function Login() {
               login
             </h1>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handellogin)}>
+              <form onSubmit={form.handleSubmit(handelLogin)}>
                 <div className="mt-12 space-y-6">
                   <FormField
                     control={form.control}
