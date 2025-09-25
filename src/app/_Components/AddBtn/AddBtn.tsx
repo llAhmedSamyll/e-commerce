@@ -16,7 +16,7 @@ export default function AddBtn({ id }: { id: string }) {
       } else {
         toast.error(res.message || "Can't Add product!");
       }
-    } catch (error: any) {
+    } catch (err) {
       toast.error("Please login first to add products !");
     } finally {
       setLoading(false);
