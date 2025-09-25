@@ -26,6 +26,7 @@ export default function Cart() {
   const [loading, setloading] = useState(false);
   const [delloading, setdelloading] = useState<string | null>(null);
   const [removeDis, setremoveDis] = useState(false);
+  const [UpdateDis, setUpdateDis] = useState(false);
   const [updatecount, setupdatecount] = useState<string | null>(null);
 
   useEffect(() => {
@@ -64,15 +65,18 @@ export default function Cart() {
 
   async function updateProduct(id: string, count: number) {
     setupdatecount(id);
+    setUpdateDis(true);
     const res = await UpdateCartQuantity(id, count);
     console.log(res);
     if (res.status === "success") {
       setproducts(res.data.products);
       toast.success("");
       setupdatecount(null);
+      setUpdateDis(false);
     } else {
       toast.error("Can't update");
       setupdatecount(null);
+      setUpdateDis(false);
     }
   }
 
@@ -164,13 +168,14 @@ export default function Cart() {
                           <div className="col-span-3  mt-2 md:mt-0 flex items-center justify-center">
                             <div className="inline-flex items-center border rounded-md overflow-hidden">
                               <button
+                                disabled={UpdateDis}
                                 onClick={() =>
                                   updateProduct(
                                     product.product.id,
                                     product.count - 1
                                   )
                                 }
-                                className="px-3 py-2 hover:bg-gray-200"
+                                className="px-3 py-2 disabled:cursor-not-allowed hover:bg-red-200 bg-red-100"
                               >
                                 <i className="fas fa-minus"></i>
                               </button>
@@ -182,13 +187,14 @@ export default function Cart() {
                                 )}
                               </div>
                               <button
+                                disabled={UpdateDis}
                                 onClick={() =>
                                   updateProduct(
                                     product.product.id,
                                     product.count + 1
                                   )
                                 }
-                                className="px-3 py-2 hover:bg-gray-200"
+                                className="px-3 disabled:cursor-not-allowed py-2 hover:bg-red-200 bg-red-100"
                               >
                                 <i className="fas fa-plus"></i>
                               </button>
@@ -263,7 +269,7 @@ export default function Cart() {
                 href="/products"
                 className="px-4 py-2 rounded-md text-sm font-medium border bg-amber-600 mt-4 text-white hover:bg-amber-500"
               >
-                shopping now
+                Shopping now
               </Link>
             </div>
           )}
