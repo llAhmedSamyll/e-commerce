@@ -6,7 +6,7 @@ import getLoggedUserCart from "../CartActions/getUerCart";
 import Link from "next/link";
 import removeItemFromCart from "../CartActions/removeCartItem";
 import toast from "react-hot-toast";
-
+import UpdateCartQuantity from "../CartActions/UpdateCartQuantity";
 export default function Cart() {
   type CartProduct = {
     _id: string;
@@ -26,6 +26,12 @@ export default function Cart() {
   const [loading, setloading] = useState(false);
   const [delloading, setdelloading] = useState<string | null>(null);
   const [removeDis, setremoveDis] = useState(false);
+  const [updatecount, setupdatecount] = useState<string | null>(null);
+
+  useEffect(() => {
+    getUserCart();
+  }, []);
+
   async function getUserCart() {
     setloading(true);
     try {
@@ -56,9 +62,19 @@ export default function Cart() {
     }
   }
 
-  useEffect(() => {
-    getUserCart();
-  }, []);
+  async function updateProduct(id: string, count: number) {
+    setupdatecount(id);
+    const res = await UpdateCartQuantity(id, count);
+    console.log(res);
+    if (res.status === "success") {
+      setproducts(res.data.products);
+      toast.success("");
+      setupdatecount(null);
+    } else {
+      toast.error("Can't update");
+      setupdatecount(null);
+    }
+  }
 
   const total = products.reduce((acc, it) => acc + it.price * it.count, 0);
 
@@ -147,13 +163,33 @@ export default function Cart() {
                           {/* quantity */}
                           <div className="col-span-3  mt-2 md:mt-0 flex items-center justify-center">
                             <div className="inline-flex items-center border rounded-md overflow-hidden">
-                              <button className="px-3 py-2 hover:bg-gray-200">
+                              <button
+                                onClick={() =>
+                                  updateProduct(
+                                    product.product.id,
+                                    product.count - 1
+                                  )
+                                }
+                                className="px-3 py-2 hover:bg-gray-200"
+                              >
                                 <i className="fas fa-minus"></i>
                               </button>
                               <div className="px-4 py-2 min-w-[56px] text-center">
-                                {product.count}
+                                {updatecount === product.product.id ? (
+                                  <i className="fa-solid fa-circle-notch fa-spin"></i>
+                                ) : (
+                                  <> {product.count} </>
+                                )}
                               </div>
-                              <button className="px-3 py-2 hover:bg-gray-200">
+                              <button
+                                onClick={() =>
+                                  updateProduct(
+                                    product.product.id,
+                                    product.count + 1
+                                  )
+                                }
+                                className="px-3 py-2 hover:bg-gray-200"
+                              >
                                 <i className="fas fa-plus"></i>
                               </button>
                             </div>
