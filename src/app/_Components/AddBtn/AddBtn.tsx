@@ -4,15 +4,25 @@ import React from "react";
 import toast from "react-hot-toast";
 
 export default function AddBtn({ id }: { id: string }) {
+  const [loading, setLoading] = React.useState(false);
+
   async function checkAddProduct(id: string) {
-    const res = await AddToCart(id);
-    console.log(res);
-    if (res.status === "success") {
-      toast.success("Product Added Successfully");
-    } else {
-      toast.error("Can't Add product !");
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await AddToCart(id);
+      if (res.status === "success") {
+        toast.success("Product Added Successfully");
+      } else {
+        toast.error(res.message || "Can't Add product!");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong!");
+    } finally {
+      setLoading(false);
     }
   }
+
   return (
     <>
       <button
