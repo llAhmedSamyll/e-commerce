@@ -11,6 +11,7 @@ export default function Cart() {
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(false);
   const [delloading, setdelloading] = useState(null);
+  const [removeDis, setremoveDis] = useState(false);
   async function getUserCart() {
     setloading(true);
     try {
@@ -27,14 +28,17 @@ export default function Cart() {
 
   async function deleteProduct(id: string) {
     setdelloading(id);
+    setremoveDis(true);
     const res = await removeItemFromCart(id);
     if (res.status === "success") {
       setproducts(res.data.products);
       toast.success("Product deleted successfully");
       setdelloading(null);
+      setremoveDis(false);
     } else {
       toast.error("Can't delete this product now !");
       setdelloading(null);
+      setremoveDis(false);
     }
   }
 
@@ -144,8 +148,9 @@ export default function Cart() {
                           {/* action */}
                           <div className="col-span-1  md:mt-0 flex justify-end">
                             <button
+                              disabled={removeDis}
                               onClick={() => deleteProduct(product.product.id)}
-                              className="p-2 rounded-md text-red-600 bg-red-100 hover:bg-red-200 "
+                              className="p-2 disabled:cursor-not-allowed  rounded-md text-red-600 bg-red-100 hover:bg-red-200 "
                             >
                               {delloading === product.product.id ? (
                                 <i className="fa-solid fa-spinner fa-spin-pulse"></i>
