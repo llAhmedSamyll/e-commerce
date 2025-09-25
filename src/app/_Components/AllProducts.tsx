@@ -2,6 +2,7 @@ import Link from "next/link";
 import getProducts from "../../api/getProducts";
 import Image from "next/image";
 import { ProductType } from "@/types/product.type";
+import AddBtn from "./AddBtn/AddBtn";
 export default async function AllProducts() {
   const data = await getProducts();
 
@@ -91,9 +92,7 @@ export default async function AllProducts() {
                   </div>
                 </div>
               </Link>
-              <button className=" cursor-pointer bg-[#FFCE12] relative text-lg translate-y-[100%]  group-hover:translate-0 transition-all transton-[.3s] font-bold w-full p-2 hover:bg-amber-400 ">
-                Add to cart
-              </button>
+              <AddBtn id={product.id}/>
             </div>
           </div>
         ))}
