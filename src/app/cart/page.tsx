@@ -68,7 +68,6 @@ export default function Cart() {
     setupdatecount(id);
     setUpdateDis(true);
     const res = await UpdateCartQuantity(id, count);
-    console.log(res);
     if (res.status === "success") {
       setproducts(res.data.products);
       toast.success("");
@@ -83,7 +82,6 @@ export default function Cart() {
 
   async function clear() {
     const res = await clearCartItems();
-    console.log(res);
     if (res.message === "success") {
       setproducts([]);
     }
