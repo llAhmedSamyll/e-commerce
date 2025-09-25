@@ -19,6 +19,8 @@ import { signIn } from "next-auth/react";
 
 export default function Login() {
   const [loading, setloading] = useState(false);
+  const [disablebtn, setdisablebtn] = useState(false);
+
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -31,6 +33,8 @@ export default function Login() {
 
   async function handelLogin(value: loginSchemaType) {
     setloading(true);
+    setdisablebtn(true);
+
     const res = await signIn("credentials", {
       email: value.email,
       password: value.password,
@@ -44,9 +48,11 @@ export default function Login() {
     } else if (res && res.error) {
       toast.error(res.error);
       setloading(false);
+      setdisablebtn(false);
     } else {
       toast.error("Something went wrong");
       setloading(false);
+      setdisablebtn(false);
     }
   }
 
@@ -131,8 +137,9 @@ export default function Login() {
                   </div>
                   <div className="!mt-12">
                     <button
+                      disabled={disablebtn}
                       type="submit"
-                      className="w-full py-2 px-4 text-[15px] font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
+                      className="w-full disabled:bg-blue-400 disabled:cursor-not-allowed py-2 px-4 text-[15px] font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
                     >
                       {loading ? (
                         <i className="fa-solid fa-spinner fa-spin-pulse"></i>
