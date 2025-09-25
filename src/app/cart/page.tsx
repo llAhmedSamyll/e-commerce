@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 export default function Cart() {
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(false);
-  const [delloading, setdelloading] = useState(null);
+  const [delloading, setdelloading] = useState<string | null>(null);
   const [removeDis, setremoveDis] = useState(false);
   async function getUserCart() {
     setloading(true);
