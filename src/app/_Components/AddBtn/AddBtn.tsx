@@ -26,10 +26,13 @@ export default function AddBtn({ id }: { id: string }) {
   return (
     <>
       <button
+        disabled={loading}
         onClick={() => checkAddProduct(id)}
-        className=" cursor-pointer bg-[#FFCE12] relative text-lg translate-y-[100%]  group-hover:translate-0 transition-all transton-[.3s] font-bold w-full p-2 hover:bg-amber-400 "
+        className={`cursor-pointer bg-[#FFCE12] relative text-lg translate-y-[100%] group-hover:translate-0 transition-all transton-[.3s] font-bold w-full p-2 hover:bg-amber-400 ${
+          loading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        Add to cart
+        {loading ? "Adding..." : "Add to cart"}
       </button>
     </>
   );
