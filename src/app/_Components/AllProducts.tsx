@@ -1,9 +1,11 @@
+"use server"
 import Link from "next/link";
 import getProducts from "../../api/getProducts";
 import Image from "next/image";
 import { ProductType } from "@/types/product.type";
 import AddBtn from "./AddBtn/AddBtn";
 export default async function AllProducts() {
+
   const data = await getProducts();
 
   return (

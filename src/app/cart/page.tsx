@@ -7,6 +7,7 @@ import Link from "next/link";
 import removeItemFromCart from "../CartActions/removeCartItem";
 import toast from "react-hot-toast";
 import UpdateCartQuantity from "../CartActions/UpdateCartQuantity";
+import clearCartItems from "../CartActions/clearCartItems";
 export default function Cart() {
   type CartProduct = {
     _id: string;
@@ -80,6 +81,14 @@ export default function Cart() {
     }
   }
 
+  async function clear() {
+    const res = await clearCartItems();
+    console.log(res);
+    if (res.message === "success") {
+      setproducts([]);
+    }
+  }
+
   const total = products.reduce((acc, it) => acc + it.price * it.count, 0);
 
   return (
@@ -97,12 +106,18 @@ export default function Cart() {
               <div className="max-w-6xl mx-auto p-4">
                 {/* Header */}
                 <header className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-yellow-100 text-yellow-800">
+                  <div className="flex items-center gap-2">
+                    <div className="p-3 rounded-s-2xl py-8 bg-[#ffffff67] text-yellow-800">
                       <i className="fas fa-shopping-cart"></i>
                     </div>
                     <div>
                       <h1 className="text-2xl font-semibold">Your Cart</h1>
+                      <button
+                        onClick={() => clear()}
+                        className="p-2 bg-red-200 hover:bg-red-300 hover:text-black cursor-pointer text-red-600 rounded-e-lg font-semibold "
+                      >
+                        <i className="fas fa-trash-alt"></i> Clear Cart items
+                      </button>
                       <p className="text-sm text-gray-500">
                         {" "}
                         {products.length} item(s)
@@ -257,8 +272,9 @@ export default function Cart() {
             <div className="px-4 mx-auto flex flex-col justify-center items-center ">
               <div className="w-[300px] mx-auto mt-40 ">
                 <Image
-                  width={300}
-                  height={300}
+                  priority
+                  width={200}
+                  height={200}
                   src="/images/cart-embty.svg"
                   alt="embty cart"
                   className="w-full"

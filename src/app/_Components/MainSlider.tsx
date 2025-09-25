@@ -9,7 +9,7 @@ export default function MainSlider() {
     <div className="container  w-full  mx-auto md:flex ">
       <div className="  w-full lg:w-3/4">
         <Swiper
-        className="cursor-grab"
+          className="cursor-grab"
           spaceBetween={0}
           slidesPerView={1}
           modules={[Autoplay]}
@@ -17,6 +17,7 @@ export default function MainSlider() {
         >
           <SwiperSlide>
             <Image
+              priority
               src="/images/slider-2.jpeg"
               alt="slider"
               width={1200}
