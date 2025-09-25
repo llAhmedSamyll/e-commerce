@@ -8,14 +8,28 @@ import removeItemFromCart from "../CartActions/removeCartItem";
 import toast from "react-hot-toast";
 
 export default function Cart() {
-  const [products, setproducts] = useState([]);
+  type CartProduct = {
+    _id: string;
+    price: number;
+    count: number;
+    product: {
+      id: string;
+      title: string;
+      imageCover: string;
+      brand: {
+        name: string;
+      };
+    };
+  };
+
+  const [products, setproducts] = useState<CartProduct[]>([]);
   const [loading, setloading] = useState(false);
   const [delloading, setdelloading] = useState<string | null>(null);
   const [removeDis, setremoveDis] = useState(false);
   async function getUserCart() {
     setloading(true);
     try {
-      let res = await getLoggedUserCart();
+      const res = await getLoggedUserCart();
       if (res.status === "success") {
         setproducts(res.data.products);
         setloading(false);
