@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import getProductDetails from "@/api/getProductDetails";
 import Image from "next/image";
-import AddBtn from "@/app/_Components/AddBtn/AddBtn";
+import AddDetailsBtn from "@/app/_Components/AddBtn/AddDetailsBtn";
 
 export default async function productDetails({
   params,
@@ -110,7 +110,7 @@ export default async function productDetails({
             </div>
           </div>
           <div className="flex justify-center mt-20 ">
-            <AddBtn id={data.id} />
+            <AddDetailsBtn id={data.id} />
           </div>
         </div>
       </div>
