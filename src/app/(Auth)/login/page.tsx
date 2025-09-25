@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import ShowPasswordButton from "@/app/_Components/ShowPasswordButton";
 import {
   Form,
@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -19,6 +18,7 @@ import { loginSchemaType, loginSchema } from "@/schema/login";
 import { signIn } from "next-auth/react";
 
 export default function Login() {
+  const [loading, setloading] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -30,6 +30,7 @@ export default function Login() {
   });
 
   async function handelLogin(value: loginSchemaType) {
+    setloading(true);
     const res = await signIn("credentials", {
       email: value.email,
       password: value.password,
@@ -37,14 +38,16 @@ export default function Login() {
       callbackUrl: "/",
     });
 
-   if (res && res.ok) {
-  toast.success("Success");
-  router.push("/");
-} else if (res && res.error) {
-  toast.error(res.error);
-} else {
-  toast.error("Something went wrong");
-}
+    if (res && res.ok) {
+      toast.success("Success");
+      router.push("/");
+    } else if (res && res.error) {
+      toast.error(res.error);
+      setloading(false);
+    } else {
+      toast.error("Something went wrong");
+      setloading(false);
+    }
   }
 
   return (
@@ -131,7 +134,11 @@ export default function Login() {
                       type="submit"
                       className="w-full py-2 px-4 text-[15px] font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
                     >
-                      Sign in
+                      {loading ? (
+                        <i className="fa-solid fa-spinner fa-spin-pulse"></i>
+                      ) : (
+                        "Sign in"
+                      )}
                     </button>
                   </div>
                   <p className="text-slate-900 text-sm !mt-6 text-center">

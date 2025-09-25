@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function Register() {
+  const [loading, setloading] = useState(false);
+
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -31,16 +33,20 @@ export default function Register() {
   });
 
   async function handelRegister(value: registerSchemaType) {
+    setloading(true);
+
     const response = await axios
       .post("https://ecommerce.routemisr.com/api/v1/auth/signup", value)
       .then((res) => {
+        setloading(false);
         toast.success(res.data.message);
         form.reset();
-        router.push("/login")
+        router.push("/login");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
-        console.log(err)
+        console.log(err);
+        setloading(false);
       });
   }
 
@@ -167,36 +173,16 @@ export default function Register() {
                     )}
                   />
 
-                  {/* <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center">
-                    <input
-                      id="remember-me"
-                      name="remember-me"
-                      type="checkbox"
-                      className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-slate-300 rounded"
-                    />
-                    <label
-                      htmlFor="remember-me"
-                      className="ml-3 block text-sm text-slate-900"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                  <div className="text-sm">
-                    <a
-                      href="jajvascript:void(0);"
-                      className="text-blue-600 hover:underline font-semibold"
-                    >
-                      Forgot your password?
-                    </a>
-                  </div>
-                </div> */}
                   <div className="!mt-12">
                     <button
                       type="submit"
                       className="w-full py-2 px-4 text-[15px] font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer"
                     >
-                      Sign up
+                      {loading ? (
+                        <i className="fa-solid fa-spinner fa-spin-pulse"></i>
+                      ) : (
+                        "Sign up"
+                      )}
                     </button>
                   </div>
                   <p className="text-slate-900 text-sm !mt-6 text-center">
