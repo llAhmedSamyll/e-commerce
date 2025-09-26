@@ -3,13 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import { CartContext } from "../context/CartCountContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
   const { data: session, status } = useSession();
+  const { products } = useContext(CartContext);
+
   function logOut() {
     signOut({ callbackUrl: "/login" });
   }
@@ -31,12 +34,13 @@ export default function Navbar() {
             {session && (
               <span
                 onClick={logOut}
-                className="text-white cursor-pointer hidden md:block bg-blue-950 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                className="text-red-300 px-2   cursor-pointer hidden md:flex justify-center items-center hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center"
               >
-                <i className="fa-solid fa-right-from-bracket fa-flip-horizontal mr-2 "></i>
+                <i className="fa-solid text-red-400 fa-right-from-bracket fa-flip-horizontal mr-2 "></i>
                 Logout
               </span>
             )}
+
             {!session ? (
               <>
                 <Link
@@ -53,11 +57,30 @@ export default function Navbar() {
             ) : (
               <>
                 {session && (
-                  <span className="text-white  font-medium rounded-lg text-sm px-4 py-2 text-center">
+                  <span className="text-white  font-medium rounded-lg text-sm px-4 py-2   flex justify-center items-center ">
                     Hi , {session?.user.name}
                   </span>
                 )}
               </>
+            )}
+            {session && (
+              <span
+                className={`${
+                  path === "/cart" ? "active" : ""
+                } flex items-center   `}
+              >
+                <Link
+                  href="/cart"
+                  className=" p-2   block justify-center relative  text-md font-medium text-white rounded-sm md:bg-transparent   "
+                >
+                  <i className=" text-white text-2xl fa-solid fa-cart-shopping"></i>
+                  {products.length > 0 && (
+                    <span className="bg-orange-500 text-xs font-sans font-semibold size-5 absolute  bottom-8 left-8 flex justify-center items-center rounded-full rounded-bl-none ">
+                      {products.length}
+                    </span>
+                  )}
+                </Link>
+              </span>
             )}
           </div>
           {/* Toggle button */}
@@ -100,16 +123,7 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            {session && (
-              <li className={path === "/cart" ? "active" : ""}>
-                <Link
-                  href="/cart"
-                  className="block py-2 px-3  text-md font-medium text-white rounded-sm md:bg-transparent   "
-                >
-                  Cart
-                </Link>
-              </li>
-            )}
+
             <li className={path === "/products" ? "active" : ""}>
               <Link
                 href="/products"
@@ -134,13 +148,13 @@ export default function Navbar() {
                 Brands
               </Link>
             </li>
-            <li >
+            <li>
               {session && (
                 <span
                   onClick={logOut}
-                  className=" w-full block  cursor-pointer text-white md:hidden bg-slate-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-4 py-2 text-center"
+                  className=" w-full block  cursor-pointer text-red-200 md:hidden bg-slate-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-4 py-2 text-center"
                 >
-                  <i className="fa-solid fa-right-from-bracket fa-flip-horizontal mr-2 "></i>
+                  <i className="fa-solid text-red-400  fa-right-from-bracket fa-flip-horizontal mr-2 "></i>
                   Logout
                 </span>
               )}

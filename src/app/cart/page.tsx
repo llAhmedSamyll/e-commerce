@@ -1,91 +1,14 @@
 "use client";
-
+import { useContext } from "react";
+import { CartContext } from "../context/CartCountContext";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import getLoggedUserCart from "../CartActions/getUerCart";
 import Link from "next/link";
-import removeItemFromCart from "../CartActions/removeCartItem";
-import toast from "react-hot-toast";
-import UpdateCartQuantity from "../CartActions/UpdateCartQuantity";
-import clearCartItems from "../CartActions/clearCartItems";
 export default function Cart() {
-  type CartProduct = {
-    _id: string;
-    price: number;
-    count: number;
-    product: {
-      id: string;
-      title: string;
-      imageCover: string;
-      brand: {
-        name: string;
-      };
-    };
-  };
+  const cart = useContext(CartContext);
+  if (!cart) throw new Error("CartContext not provided");
 
-  const [products, setproducts] = useState<CartProduct[]>([]);
-  const [loading, setloading] = useState(false);
-  const [delloading, setdelloading] = useState<string | null>(null);
-  const [removeDis, setremoveDis] = useState(false);
-  const [UpdateDis, setUpdateDis] = useState(false);
-  const [updatecount, setupdatecount] = useState<string | null>(null);
-
-  useEffect(() => {
-    getUserCart();
-  }, []);
-
-  async function getUserCart() {
-    setloading(true);
-    try {
-      const res = await getLoggedUserCart();
-      if (res.status === "success") {
-        setproducts(res.data.products);
-        setloading(false);
-      }
-    } catch (err) {
-      setloading(false);
-      console.log(err);
-    }
-  }
-
-  async function deleteProduct(id: string) {
-    setdelloading(id);
-    setremoveDis(true);
-    const res = await removeItemFromCart(id);
-    if (res.status === "success") {
-      setproducts(res.data.products);
-      toast.success("Product deleted successfully");
-      setdelloading(null);
-      setremoveDis(false);
-    } else {
-      toast.error("Can't delete this product now !");
-      setdelloading(null);
-      setremoveDis(false);
-    }
-  }
-
-  async function updateProduct(id: string, count: number) {
-    setupdatecount(id);
-    setUpdateDis(true);
-    const res = await UpdateCartQuantity(id, count);
-    if (res.status === "success") {
-      setproducts(res.data.products);
-      toast.success("");
-      setupdatecount(null);
-      setUpdateDis(false);
-    } else {
-      toast.error("Can't update");
-      setupdatecount(null);
-      setUpdateDis(false);
-    }
-  }
-
-  async function clear() {
-    const res = await clearCartItems();
-    if (res.message === "success") {
-      setproducts([]);
-    }
-  }
+  const { products, loading, btnDisable, deleteProduct, updateProduct, clear } =
+    cart;
 
   const total = products.reduce((acc, it) => acc + it.price * it.count, 0);
 
@@ -181,7 +104,6 @@ export default function Cart() {
                           <div className="col-span-3  mt-2 md:mt-0 flex items-center justify-center">
                             <div className="inline-flex items-center border rounded-md overflow-hidden">
                               <button
-                                disabled={UpdateDis}
                                 onClick={() =>
                                   updateProduct(
                                     product.product.id,
@@ -193,14 +115,9 @@ export default function Cart() {
                                 <i className="fas fa-minus"></i>
                               </button>
                               <div className="px-4 py-2 min-w-[56px] text-center">
-                                {updatecount === product.product.id ? (
-                                  <i className="fa-solid fa-circle-notch fa-spin"></i>
-                                ) : (
-                                  <> {product.count} </>
-                                )}
+                                {product.count}
                               </div>
                               <button
-                                disabled={UpdateDis}
                                 onClick={() =>
                                   updateProduct(
                                     product.product.id,
@@ -217,15 +134,10 @@ export default function Cart() {
                           {/* action */}
                           <div className="col-span-1  md:mt-0 flex justify-end">
                             <button
-                              disabled={removeDis}
                               onClick={() => deleteProduct(product.product.id)}
                               className="p-2 disabled:cursor-not-allowed  rounded-md text-red-600 bg-red-100 hover:bg-red-200 "
                             >
-                              {delloading === product.product.id ? (
-                                <i className="fa-solid fa-spinner fa-spin-pulse"></i>
-                              ) : (
-                                <i className="fas fa-trash-alt"></i>
-                              )}
+                              <i className="fas fa-trash-alt"></i>
                             </button>
                           </div>
 
@@ -254,11 +166,11 @@ export default function Cart() {
                     <div className="flex items-center justify-center gap-3">
                       <Link
                         href="/products"
-                        className="px-4 py-2 rounded-md text-sm font-medium border hover:bg-gray-200"
+                        className="px-4 py-2 rounded-md text-sm font-medium border bg-gray-300 hover:bg-gray-200"
                       >
                         Continue shopping
                       </Link>
-                      <button className="px-5 py-2 rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400">
+                      <button disabled={btnDisable} className="px-5 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400">
                         Proceed to Checkout
                       </button>
                     </div>

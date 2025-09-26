@@ -29,6 +29,7 @@ export default async function productDetails({
               {data.images.map((img: string) => (
                 <CarouselItem key={img}>
                   <Image
+                    priority
                     className="w-full"
                     width={1000}
                     height={1000}

@@ -10,7 +10,7 @@ export default async function AllProducts() {
 
   return (
     <>
-      <div className="container mx-auto flex   flex-wrap">
+      <div className="container mx-auto flex py-5  flex-wrap">
         {data.map((product: ProductType) => (
           <div
             key={product.id}

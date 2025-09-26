@@ -1,10 +1,18 @@
 "use client";
 import AddToCart from "@/app/CartActions/addToCart";
-import React from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { CartContext } from "../../context/CartCountContext";
+
+
 
 export default function AddBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);
+    const cart = useContext(CartContext);
+
+  if (!cart) throw new Error("CartContext not provided");
+  const { getUserCart } = cart;
+
 
   async function checkAddProduct(id: string) {
     if (loading) return;
@@ -13,10 +21,12 @@ export default function AddBtn({ id }: { id: string }) {
       const res = await AddToCart(id);
       if (res.status === "success") {
         toast.success("Product Added Successfully");
+        await getUserCart();
       } else {
         toast.error(res.message || "Can't Add product!");
       }
     } catch (err) {
+      console.log(err);
       toast.error("Please login first to add products !");
     } finally {
       setLoading(false);
