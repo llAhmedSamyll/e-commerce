@@ -94,7 +94,6 @@ export default async function AllProducts() {
                   </div>
                 </div>
               </Link>
-              <div className="absolute bottom-0 text-lg  font-bold p-2 text-teal-500 w-full text-center border-t-2">Add to cart</div>
               <AddBtn id={product.id}/>
               
             </div>
