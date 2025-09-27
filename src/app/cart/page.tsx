@@ -64,9 +64,10 @@ export default function Cart() {
                     <div className="col-span-3 text-center">Quantity</div>
                     <div className="col-span-1 text-right">Action</div>
                   </div>
-                  <ul>
+                  <ul data-aos="zoom-in">
                     {products.map((product) => (
                       <li
+                        data-aos="fade-left"
                         key={product._id}
                         className="p-4 md:px-4 md:py-2 odd:bg-teal-100 even:bg-white "
                       >
@@ -170,7 +171,10 @@ export default function Cart() {
                       >
                         Continue shopping
                       </Link>
-                      <button disabled={btnDisable} className="px-5 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400">
+                      <button
+                        disabled={btnDisable}
+                        className="px-5 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
+                      >
                         Proceed to Checkout
                       </button>
                     </div>
