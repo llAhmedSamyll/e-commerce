@@ -64,7 +64,7 @@ export default function Cart() {
                     <div className="col-span-3 text-center">Quantity</div>
                     <div className="col-span-1 text-right">Action</div>
                   </div>
-                  <ul data-aos="zoom-in">
+                  <ul data-aos="fade-left">
                     {products.map((product) => (
                       <li
                         data-aos="fade-left"
