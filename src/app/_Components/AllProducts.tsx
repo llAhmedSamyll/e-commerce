@@ -14,10 +14,10 @@ export default async function AllProducts() {
         {data.map((product: ProductType) => (
           <div
             key={product.id}
-            className=" w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 md:p-2 p-2  "
+            className=" w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 md:p-2 p-2 group "
             data-aos="fade-up"
           >
-            <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border group relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
+            <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border  relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
               <Link href={`/products/${product.id}`}>
                 <div className="relative  border-b border-teal-400 ">
                   <Image
@@ -94,7 +94,9 @@ export default async function AllProducts() {
                   </div>
                 </div>
               </Link>
+              <div className="absolute bottom-0 text-lg  font-bold p-2 text-teal-500 w-full text-center border-t-2">Add to cart</div>
               <AddBtn id={product.id}/>
+              
             </div>
           </div>
         ))}

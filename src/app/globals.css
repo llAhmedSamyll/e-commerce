@@ -8,6 +8,23 @@
   border-radius: 5px;
   transition: all 0.1s ease;
 }
+/* Scrollbar  */
+
+body {
+  overflow-y: scroll !important;
+}
+
+body::-webkit-scrollbar {
+  width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #101828;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ffae00;
+}
 
 @theme inline {
   --color-background: var(--background);
