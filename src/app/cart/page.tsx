@@ -111,6 +111,7 @@ export default function Cart() {
                                     product.count - 1
                                   )
                                 }
+                                disabled={product.count < 2}
                                 className="px-3 py-2 disabled:cursor-not-allowed hover:bg-red-200 bg-red-100"
                               >
                                 <i className="fas fa-minus"></i>
@@ -167,13 +168,13 @@ export default function Cart() {
                     <div className="flex items-center justify-center gap-3">
                       <Link
                         href="/products"
-                        className="px-4 py-2 rounded-md text-sm font-medium border bg-gray-300 hover:bg-gray-200"
+                        className="px-2 py-2 rounded-md text-sm font-medium border bg-gray-300 hover:bg-gray-200"
                       >
                         Continue shopping
                       </Link>
                       <button
                         disabled={btnDisable}
-                        className="px-5 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
+                        className="px-2 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
                       >
                         Proceed to Checkout
                       </button>
