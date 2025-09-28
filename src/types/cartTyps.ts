@@ -40,4 +40,5 @@ export type CartContextType = {
   deleteProduct: (id: string) => Promise<void>;
   updateProduct: (id: string, count: number) => Promise<void>;
   clear: () => Promise<void>;
+  clearloader : boolean
 };

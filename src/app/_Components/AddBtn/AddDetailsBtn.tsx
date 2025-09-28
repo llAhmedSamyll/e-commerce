@@ -39,7 +39,7 @@ export default function AddDetailsBtn({ id }: { id: string }) {
           loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {loading ? "Adding..." : "Add to cart"}
+        {loading ? <i className="fa-solid fa-spinner fa-spin-pulse"></i> : "Add to cart"}
       </button>
     </>
   );

@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { CartContext } from "../context/CartCountContext";
 
@@ -20,6 +20,9 @@ export default function Navbar() {
   const path = usePathname();
   const { data: session, status } = useSession();
   const { products } = useContext(CartContext);
+
+  const totalCount = products.reduce((acc, product) => acc + product.count, 0);
+
 
   function logOut() {
     signOut({ callbackUrl: "/login" });
@@ -108,7 +111,7 @@ export default function Navbar() {
                   <i className=" text-white text-2xl fa-solid fa-cart-shopping"></i>
                   {products.length > 0 && (
                     <span className="bg-orange-500 text-xs font-sans font-semibold size-5 absolute  bottom-8 left-8 flex justify-center items-center rounded-full rounded-bl-none ">
-                      {products.length}
+                      {totalCount}
                     </span>
                   )}
                 </Link>

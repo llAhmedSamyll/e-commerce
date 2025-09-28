@@ -5,7 +5,6 @@ import React from "react";
 
 export default async function Brands() {
   const { data }: { data: brandType[] } = await getBrands();
-  console.log(data);
 
   return (
     <div className="container mx-auto py-4 ">

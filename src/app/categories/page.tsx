@@ -18,6 +18,7 @@ import SubCategory from "../_Components/SubCategory";
 export default async function Categories() {
   const { data }: { data: CategoryType[] } = await getAllCategories();
 
+
   return (
     <>
       <div className="container mx-auto ">

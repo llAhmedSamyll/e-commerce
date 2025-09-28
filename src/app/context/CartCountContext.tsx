@@ -13,11 +13,12 @@ export const CartContext = createContext<CartContextType | null>(null);
 export default function CartProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; 
 }) {
   const [loading, setLoading] = useState(false);
   const [btnDisable, setbtnDisable] = useState(false);
   const [products, setProducts] = useState<CartProduct[]>([]);
+  const [clearloader, setclearloader] = useState(false)
 
   async function getUserCart() {
     setLoading(true);
@@ -36,7 +37,7 @@ export default function CartProvider({
 
   useEffect(() => {
     if (session?.user) {
-      getUserCart(); 
+      getUserCart();
     }
   }, [session]);
 
@@ -73,9 +74,11 @@ export default function CartProvider({
   }
 
   async function clear() {
+    setclearloader(true)
     const res = await clearCartItems();
     if (res.message === "success") {
       toast.success("Deleted successfully");
+      setclearloader(false)
       setProducts([]);
     }
   }
@@ -91,6 +94,7 @@ export default function CartProvider({
         updateProduct,
         clear,
         btnDisable,
+        clearloader
       }}
     >
       {children}

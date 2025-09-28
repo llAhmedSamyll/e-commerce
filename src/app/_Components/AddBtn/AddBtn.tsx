@@ -42,7 +42,7 @@ export default function AddBtn({ id }: { id: string }) {
           loading ? "bg-[#fff6d4] hover:bg-[#fff6d4] cursor-not-allowed" : ""
         }`}
       >
-        {loading ? "Adding..." : "Add to cart"}
+        {loading ? <i className="fa-solid fa-spinner fa-spin-pulse"></i> : "Add to cart"}
       </button>
     </>
   );

@@ -7,7 +7,7 @@ export default function Cart() {
   const cart = useContext(CartContext);
   if (!cart) throw new Error("CartContext not provided");
 
-  const { products, loading, btnDisable, deleteProduct, updateProduct, clear } =
+  const { products, loading, btnDisable, deleteProduct, updateProduct, clear , clearloader } =
     cart;
 
   const total = products.reduce((acc, it) => acc + it.price * it.count, 0);
@@ -37,7 +37,7 @@ export default function Cart() {
                         onClick={() => clear()}
                         className="p-2 bg-red-200 hover:bg-red-300 hover:text-black cursor-pointer text-red-600 rounded-e-lg font-semibold "
                       >
-                        <i className="fas fa-trash-alt"></i> Clear Cart items
+                        {clearloader? <i className="fa-solid fa-spinner fa-spin-pulse"></i> : <i className="fas fa-trash-alt"></i> } Clear Cart items
                       </button>
                       <p className="text-sm text-gray-500">
                         {" "}
