@@ -10,9 +10,7 @@
 }
 /* Scrollbar  */
 
-body {
-  overflow-y: scroll !important;
-}
+
 
 body::-webkit-scrollbar {
   width: 15px;

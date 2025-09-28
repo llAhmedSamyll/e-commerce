@@ -6,6 +6,7 @@ import UpdateCartQuantity from "../CartActions/UpdateCartQuantity";
 import clearCartItems from "../CartActions/clearCartItems";
 import toast from "react-hot-toast";
 import { CartContextType, CartProduct } from "@/types/cartTyps";
+import { useSession } from "next-auth/react";
 
 export const CartContext = createContext<CartContextType | null>(null);
 
@@ -31,10 +32,13 @@ export default function CartProvider({
       setLoading(false);
     }
   }
+  const { data: session } = useSession();
 
   useEffect(() => {
-    getUserCart();
-  }, []);
+    if (session?.user) {
+      getUserCart(); 
+    }
+  }, [session]);
 
   async function deleteProduct(id: string) {
     setbtnDisable(true);

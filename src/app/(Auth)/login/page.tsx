@@ -47,6 +47,7 @@ export default function Login() {
       router.push("/");
     } else if (res && res.error) {
       toast.error(res.error);
+      console.log(res.error);
       setloading(false);
       setdisablebtn(false);
     } else {
