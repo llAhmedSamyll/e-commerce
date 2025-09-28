@@ -4,12 +4,23 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
   if (token) {
-    return NextResponse.next();
+    if (
+      request.nextUrl.pathname === "/login" ||
+      request.nextUrl.pathname === "/register"
+    ) {
+      return NextResponse.redirect(new URL("/", request.url));
+    } else {
+      return NextResponse.next();
+    }
   } else {
-    return NextResponse.redirect(new URL("/login", request.url));
+    if (request.nextUrl.pathname === "/cart" || request.nextUrl.pathname === "/wishlist" ) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else {
+      return NextResponse.next();
+    }
   }
 }
 
 export const config = {
-  matcher: ["/cart"],
-}
+  matcher: ["/cart", "/login", "/register" , "/wishlist"],
+};
