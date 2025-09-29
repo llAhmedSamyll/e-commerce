@@ -1,24 +1,36 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
-import getLoggedUserCart from "../CartActions/getUerCart";
-import removeItemFromCart from "../CartActions/removeCartItem";
-import UpdateCartQuantity from "../CartActions/UpdateCartQuantity";
-import clearCartItems from "../CartActions/clearCartItems";
+import getLoggedUserCart from "../cart/CartActions/getUerCart";
+import removeItemFromCart from "../cart/CartActions/removeCartItem";
+import UpdateCartQuantity from "../cart/CartActions/UpdateCartQuantity";
+import clearCartItems from "../cart/CartActions/clearCartItems";
 import toast from "react-hot-toast";
 import { CartContextType, CartProduct } from "@/types/cartTyps";
 import { useSession } from "next-auth/react";
+import getWishlist from "@/api/getWishlist";
+import { ProductType } from "@/types/product.type";
 
 export const CartContext = createContext<CartContextType | null>(null);
 
 export default function CartProvider({
   children,
 }: {
-  children: React.ReactNode; 
+  children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState(false);
   const [btnDisable, setbtnDisable] = useState(false);
   const [products, setProducts] = useState<CartProduct[]>([]);
-  const [clearloader, setclearloader] = useState(false)
+  const [clearloader, setclearloader] = useState(false);
+  const [wishlist, setwishlist] = useState<ProductType[]>([]);
+
+  async function getUserWishList() {
+    const list = await getWishlist();
+    if (list.status === "success") {
+      setwishlist(list?.data);
+    } else {
+      console.log(list.message);
+    }
+  }
 
   async function getUserCart() {
     setLoading(true);
@@ -38,6 +50,7 @@ export default function CartProvider({
   useEffect(() => {
     if (session?.user) {
       getUserCart();
+      getUserWishList();
     }
   }, [session]);
 
@@ -74,11 +87,11 @@ export default function CartProvider({
   }
 
   async function clear() {
-    setclearloader(true)
+    setclearloader(true);
     const res = await clearCartItems();
     if (res.message === "success") {
       toast.success("Deleted successfully");
-      setclearloader(false)
+      setclearloader(false);
       setProducts([]);
     }
   }
@@ -94,7 +107,10 @@ export default function CartProvider({
         updateProduct,
         clear,
         btnDisable,
-        clearloader
+        clearloader,
+        wishlist,
+        setwishlist,
+        getUserWishList,
       }}
     >
       {children}

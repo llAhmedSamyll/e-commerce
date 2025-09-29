@@ -8,6 +8,7 @@ import {
 import getProductDetails from "@/api/getProductDetails";
 import Image from "next/image";
 import AddDetailsBtn from "@/app/_Components/AddBtn/AddDetailsBtn";
+import Wishlist from "@/app/_Components/Wishlistbtn";
 
 export default async function productDetails({
   params,
@@ -48,7 +49,11 @@ export default async function productDetails({
           <span className="bg-blue-100 text-teal-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm ">
             {data.category.name}
           </span>
-          <h1 className="font-bold text-2xl p-4">{data.title}</h1>
+          <div className="flex justify-between items-center ">
+            <h1 className="font-bold text-2xl p-4">{data.title}</h1>
+
+            <Wishlist />
+          </div>
           <p className="font-mono text-teal-700  "> {data.description}</p>
           <div>
             <span className="font-bold text-teal-900  ">

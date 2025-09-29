@@ -30,6 +30,6 @@
     "src/app/_Components/MainSlider.tsx",
     "src/app/_Components/AllProducts.tsx",
     "src/app/_Components/CategorySwiper.tsx"
-, "src/app/context/CartCountContext.tsx", "src/app/_Components/SubCategory.tsx"  ],
+, "src/app/context/CartCountContext.tsx", "src/app/_Components/SubCategory.tsx", "src/app/_Components/Wishlistbtn.jsx"  ],
   "exclude": ["node_modules"]
 }

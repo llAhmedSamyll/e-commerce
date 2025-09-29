@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
 
-export default function AddBtn({ id }: { id: string }) {
+export default function AddDetailsBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);
   const cart = useContext(CartContext);
 
@@ -23,7 +23,6 @@ export default function AddBtn({ id }: { id: string }) {
         toast.error(res.message || "Can't Add product!");
       }
     } catch (err) {
-      console.log(err);
       toast.error("Please login first to add products !");
     } finally {
       setLoading(false);
@@ -35,8 +34,8 @@ export default function AddBtn({ id }: { id: string }) {
       <button
         disabled={loading}
         onClick={() => checkAddProduct(id)}
-        className={`cursor-pointer bg-[#FFCE12] relative text-lg lg:translate-y-[100%] lg:group-hover:translate-0 transition-all  font-bold w-full p-2 hover:bg-amber-400 ${
-          loading ? "bg-[#fff6d4] hover:bg-[#fff6d4] cursor-not-allowed" : ""
+        className={`  bg-[#FFCE12]  relative  transition-all text-md lg:text-lg font-semibold w-[80%] cursor-pointer rounded-lg px-2 py-1 md:px-4 md:py-2  hover:bg-amber-400 ${
+          loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
         {loading ? (

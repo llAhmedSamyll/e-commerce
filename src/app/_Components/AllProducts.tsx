@@ -1,11 +1,11 @@
-"use server"
+"use server";
 import Link from "next/link";
 import getProducts from "../../api/getProducts";
 import Image from "next/image";
 import { ProductType } from "@/types/product.type";
 import AddBtn from "./AddBtn/AddBtn";
+import Wishlist from "./Wishlistbtn";
 export default async function AllProducts() {
-
   const data = await getProducts();
 
   return (
@@ -18,6 +18,9 @@ export default async function AllProducts() {
             data-aos="fade-up"
           >
             <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border  relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
+              <div className="absolute top-99 right-1 p-2  z-50 " >
+                <Wishlist id={product.id} />
+              </div>
               <Link href={`/products/${product.id}`}>
                 <div className="relative  border-b border-teal-400 ">
                   <Image
@@ -41,9 +44,11 @@ export default async function AllProducts() {
                 </div>
                 <div>
                   <div className="p-3">
-                    <span className="bg-blue-100 text-teal-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm ">
-                      {product.category.name}
-                    </span>
+                    <div className="flex justify-between">
+                      <span className="bg-blue-100 text-teal-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm ">
+                        {product.category.name}
+                      </span>
+                    </div>
                     <h1 className="line-clamp-1 text-lg font-bold ">
                       {product.title}
                     </h1>
@@ -94,8 +99,7 @@ export default async function AllProducts() {
                   </div>
                 </div>
               </Link>
-              <AddBtn id={product.id}/>
-              
+              <AddBtn id={product.id} />
             </div>
           </div>
         ))}

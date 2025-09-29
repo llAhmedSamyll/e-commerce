@@ -79,7 +79,9 @@ export default function Navbar() {
                         Hi , {session?.user.name}
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="z-50" disableScrollLock>
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link href="/wishlist" className="font-semibold" ><i className="fa-solid fa-heart text-red-500 mr-2 "></i>Wish List</Link>
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="cursor-pointer ">
                           {session && (

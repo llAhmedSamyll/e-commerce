@@ -1,9 +1,8 @@
 "use client";
-import AddToCart from "@/app/CartActions/addToCart";
+import AddToCart from "@/app/cart/CartActions/addToCart";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
-
 
 export default function AddDetailsBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);
@@ -39,7 +38,11 @@ export default function AddDetailsBtn({ id }: { id: string }) {
           loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {loading ? <i className="fa-solid fa-spinner fa-spin-pulse"></i> : "Add to cart"}
+        {loading ? (
+          <i className="fa-solid fa-spinner fa-spin-pulse"></i>
+        ) : (
+          "Add to cart"
+        )}
       </button>
     </>
   );
