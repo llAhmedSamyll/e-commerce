@@ -7,7 +7,7 @@ export default async function getWishlist() {
       token: String(token),
     },
     method: "GET",
-    next: { revalidate: 120 },
+    cache: "no-store",
   });
   const data = await res.json();
   return data;
