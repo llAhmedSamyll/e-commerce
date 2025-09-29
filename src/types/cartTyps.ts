@@ -46,5 +46,4 @@ export type CartContextType = {
 
   wishlist: ProductType[];
   setwishlist: React.Dispatch<React.SetStateAction<ProductType[]>>;
-  toggleWishlist: (product: ProductType) => void;
 };
