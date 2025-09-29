@@ -52,7 +52,7 @@ export default async function productDetails({
           <div className="flex justify-between items-center ">
             <h1 className="font-bold text-2xl p-4">{data.title}</h1>
 
-            <Wishlist />
+            <Wishlist id={data.id} />
           </div>
           <p className="font-mono text-teal-700  "> {data.description}</p>
           <div>
