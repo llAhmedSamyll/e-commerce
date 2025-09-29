@@ -18,7 +18,7 @@ export default async function AllProducts() {
             data-aos="fade-up"
           >
             <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border  relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
-              <div className="absolute top-99 right-1 p-2  z-50 " >
+              <div className="absolute top-0 left-0 p-2  z-50 " >
                 <Wishlist id={product.id} />
               </div>
               <Link href={`/products/${product.id}`}>
