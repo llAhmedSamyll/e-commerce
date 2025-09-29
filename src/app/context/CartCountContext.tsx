@@ -110,7 +110,6 @@ export default function CartProvider({
         clearloader,
         wishlist,
         setwishlist,
-        getUserWishList,
       }}
     >
       {children}
