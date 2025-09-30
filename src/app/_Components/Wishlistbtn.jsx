@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
 import { addToWishList } from "../wishlist/_WishListActions/addToWishList";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import getMyToken from "@/utilities.ts/getMyToken";
 
 export default function Wishlist({ id }) {
+  const [loading, setloading] = useState(false);
   const data = useContext(CartContext);
 
   if (!data) return null;
@@ -16,10 +17,12 @@ export default function Wishlist({ id }) {
   const { wishlist, setwishlist } = data;
 
   async function wishlisttoggle() {
+    setloading(true);
     const token = await getMyToken();
 
     if (!token) {
       toast.error("Login first !!");
+      setloading(false);
     }
 
     const exists = wishlist.some((item) => item._id === id);
@@ -27,8 +30,10 @@ export default function Wishlist({ id }) {
       setwishlist(wishlist.filter((item) => item._id !== id));
       try {
         await removeFromWishlist(id);
+        setloading(false);
       } catch (err) {
         console.error(err);
+        setloading(false);
       }
     } else {
       setwishlist([...wishlist, { _id: id }]);
@@ -39,6 +44,7 @@ export default function Wishlist({ id }) {
       } catch (err) {
         console.log(err);
       }
+      setloading(false);
     }
   }
 
@@ -47,8 +53,11 @@ export default function Wishlist({ id }) {
       onClick={wishlisttoggle}
       className="size-8 rounded-full bg-white border-1 border-red-400 flex items-center justify-center"
     >
-      <i
-        className={`
+      {loading ? (
+        <i className="fa-solid fa-circle-notch fa-spin"></i>
+      ) : (
+        <i
+          className={`
     cursor-pointer transition-transform duration-200 ease-in-out
     ${
       wishlist.some((item) => item.id === id)
@@ -56,7 +65,8 @@ export default function Wishlist({ id }) {
         : "fa-regular fa-heart text-red-500 hover:scale-125"
     } 
   `}
-      ></i>
+        ></i>
+      )}
     </div>
   );
 }
