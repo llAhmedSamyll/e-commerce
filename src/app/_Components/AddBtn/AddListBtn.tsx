@@ -3,8 +3,8 @@ import AddToCart from "@/app/cart/CartActions/addToCart";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
-import { removeFromWishlist } from "@/app/wishlist/WishListActions/removeFromWishlist";
 import getWishlist from "@/api/getWishlist";
+import { removeFromWishlist } from "../../wishlist/WishListActions/removeFromWishlist";
 
 export default function AddDetailsBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);
