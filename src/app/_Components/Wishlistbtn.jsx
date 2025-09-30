@@ -5,6 +5,7 @@ import { CartContext } from "../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
 import { addToWishList } from "../wishlist/_WishListActions/addToWishList";
 import { removeFromWishlist } from "../wishlist/_WishListActions/removeFromWishlist";
+import toast from "react-hot-toast";
 
 export default function Wishlist({ id }) {
   const data = useContext(CartContext);
@@ -28,7 +29,7 @@ export default function Wishlist({ id }) {
         const data = await getWishlist();
         setwishlist(data.data);
       } catch (err) {
-        console.error(err);
+        toast.error(err);
       }
     }
   }
