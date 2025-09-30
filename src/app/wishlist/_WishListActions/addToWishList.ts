@@ -1,9 +1,11 @@
 import getMyToken from "@/utilities.ts/getMyToken";
+import toast from "react-hot-toast";
 
 export async function addToWishList(id: string) {
   const token = await getMyToken();
   if (!token) {
     throw new Error("please login first to add products ");
+    toast.error("please login first")
   }
   const res = await fetch("https://ecommerce.routemisr.com/api/v1/wishlist", {
     method: "POST",

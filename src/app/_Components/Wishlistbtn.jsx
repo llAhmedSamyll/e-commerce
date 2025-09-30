@@ -6,14 +6,22 @@ import getWishlist from "@/api/getWishlist";
 import { addToWishList } from "../wishlist/_WishListActions/addToWishList";
 import { removeFromWishlist } from "../wishlist/_WishListActions/removeFromWishlist";
 import toast from "react-hot-toast";
+import getMyToken from "@/utilities.ts/getMyToken";
 
 export default function Wishlist({ id }) {
   const data = useContext(CartContext);
+
   if (!data) return null;
 
   const { wishlist, setwishlist } = data;
 
   async function wishlisttoggle() {
+    const token = await getMyToken();
+
+    if (!token) {
+      toast.error("Login first !!");
+    }
+
     const exists = wishlist.some((item) => item._id === id);
     if (exists) {
       setwishlist(wishlist.filter((item) => item._id !== id));
@@ -29,7 +37,7 @@ export default function Wishlist({ id }) {
         const data = await getWishlist();
         setwishlist(data.data);
       } catch (err) {
-        toast.error(err);
+        console.log(err);
       }
     }
   }
