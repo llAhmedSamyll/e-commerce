@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
 import { removeFromWishlist } from "../wishlist/wishListActions/removeFromWishlist";
-import { addToWishList } from "../wishlist/wishListActions/addToWishList";
+import addToWishList from "../wishlist/wishListActions/addToWishList";
 
 export default function Wishlist({ id }) {
   const data = useContext(CartContext);
