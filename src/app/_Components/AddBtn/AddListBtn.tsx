@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
-import { removeFromWishlist } from "../../wishlist/WishListActions/removeFromWishlist";
+import { removeFromWishlist } from "../../wishlist/_WishListActions/removeFromWishlist";
 
 export default function AddDetailsBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);

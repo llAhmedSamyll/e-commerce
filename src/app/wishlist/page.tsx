@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartCountContext";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { removeFromWishlist } from "./WishListActions/removeFromWishlist";
-
+import { removeFromWishlist } from "./_WishListActions/removeFromWishlist";
 
 export default function Page() {
   const data = useContext(CartContext);
