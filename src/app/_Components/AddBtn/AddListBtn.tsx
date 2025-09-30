@@ -3,7 +3,7 @@ import AddToCart from "@/app/cart/CartActions/addToCart";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
-import { removeFromWishlist } from "@/app/wishlist/wishListActions/removeFromWishlist";
+import { removeFromWishlist } from "@/app/wishlist/WishListActions/removeFromWishlist";
 import getWishlist from "@/api/getWishlist";
 
 export default function AddDetailsBtn({ id }: { id: string }) {
@@ -11,8 +11,7 @@ export default function AddDetailsBtn({ id }: { id: string }) {
   const cart = useContext(CartContext);
 
   if (!cart) throw new Error("CartContext not provided");
-  const { getUserCart , setwishlist } = cart;
-
+  const { getUserCart, setwishlist } = cart;
 
   async function checkAddProduct(id: string) {
     if (loading) return;
