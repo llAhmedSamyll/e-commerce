@@ -3,9 +3,10 @@ import Image from "next/image";
 import AddListBtn from "../_Components/AddBtn/AddListBtn";
 import { useContext } from "react";
 import { CartContext } from "../context/CartCountContext";
-import { removeFromWishlist } from "./WishListActions/removeFromWishlist";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { removeFromWishlist } from "./WishListActions/removeFromWishlist";
+
 
 export default function Page() {
   const data = useContext(CartContext);
