@@ -37,6 +37,7 @@ export type CartContextType = {
   products: CartProduct[];
   setProducts: React.Dispatch<React.SetStateAction<CartProduct[]>>;
   loading: boolean;
+  wishloading: boolean
   btnDisable: boolean;
   getUserCart: () => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;

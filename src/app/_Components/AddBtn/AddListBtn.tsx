@@ -3,13 +3,16 @@ import AddToCart from "@/app/cart/CartActions/addToCart";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { CartContext } from "../../context/CartCountContext";
+import { removeFromWishlist } from "@/app/wishlist/wishListActions/removeFromWishlist";
+import getWishlist from "@/api/getWishlist";
 
 export default function AddDetailsBtn({ id }: { id: string }) {
   const [loading, setLoading] = React.useState(false);
   const cart = useContext(CartContext);
 
   if (!cart) throw new Error("CartContext not provided");
-  const { getUserCart } = cart;
+  const { getUserCart , setwishlist } = cart;
+
 
   async function checkAddProduct(id: string) {
     if (loading) return;
@@ -19,6 +22,9 @@ export default function AddDetailsBtn({ id }: { id: string }) {
       if (res.status === "success") {
         toast.success("Product Added Successfully");
         await getUserCart();
+        await removeFromWishlist(id);
+        const data = await getWishlist();
+        setwishlist(data.data);
       } else {
         toast.error(res.message || "Can't Add product!");
       }

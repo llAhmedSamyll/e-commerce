@@ -18,9 +18,6 @@ export default async function AllProducts() {
             data-aos="fade-up"
           >
             <div className="   rounded-lg bg-[#f3f3f3]   overflow-hidden  border  relative hover:shadow-lg shadow-teal-600 hover:scale-[1.02] border-teal-400 transition-all  ">
-              <div className="absolute top-0 left-0 p-2  z-50 " >
-                <Wishlist id={product.id} />
-              </div>
               <Link href={`/products/${product.id}`}>
                 <div className="relative  border-b border-teal-400 ">
                   <Image
@@ -77,8 +74,8 @@ export default async function AllProducts() {
                       <div className="mt-3">
                         {product.priceAfterDiscount &&
                           product.priceAfterDiscount < product.price && (
-                            <div>
-                              <span className="bg-yellow-200 text-black text-xs font-semibold px-2 py-1 rounded-full">
+                            <div className="-mt-2" >
+                              <span className="bg-yellow-200 text-black text-xs font-semibold px-2 py-1  rounded-full">
                                 -
                                 {Math.round(
                                   ((product.price -
@@ -92,13 +89,19 @@ export default async function AllProducts() {
                           )}
                       </div>
                     </div>
-                    <span className="font-bold text-teal-900 ">
-                      {product.ratingsAverage}{" "}
-                    </span>
-                    <i className="fa-solid fa-star text-yellow-400" />
                   </div>
                 </div>
               </Link>
+
+              <div className="flex justify-between items-center mb-3">
+                <span className="font-bold text-teal-900 ml-3 ">
+                  {product.ratingsAverage}{" "}
+                  <i className="fa-solid fa-star text-yellow-400" />
+                </span>
+                <div className="z-50 mr-4 ">
+                  <Wishlist id={product.id} />
+                </div>
+              </div>
               <AddBtn id={product.id} />
             </div>
           </div>

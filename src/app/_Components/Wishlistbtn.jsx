@@ -1,35 +1,20 @@
 "use client";
 
 import React, { useContext } from "react";
-import { addToWishList } from "../wishlist/wishListActions/addtowishlist";
 import { CartContext } from "../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
-
-// Function جديدة لمسح المنتج من wishlist في السيرفر
-async function removeFromWishlist(id) {
-  const token = await getMyToken();
-  if (!token) throw new Error("Please login first to remove product");
-
-  const res = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,
-    {
-      method: "DELETE",
-      headers: { token },
-    }
-  );
-  return res.json();
-}
+import { addToWishList } from "../wishlist/wishListActions/addToWishList";
+import { removeFromWishlist } from "../wishlist/wishListActions/removeFromWishlist";
 
 export default function Wishlist({ id }) {
   const data = useContext(CartContext);
-  if (!data) return null; // بدل throw Error
+  if (!data) return null;
 
   const { wishlist, setwishlist } = data;
 
   async function wishlisttoggle() {
-    const exists = wishlist.some((item) => item._id === id); // صححت المقارنة
+    const exists = wishlist.some((item) => item._id === id);
     if (exists) {
-      // إزالة من السياق والسيرفر
       setwishlist(wishlist.filter((item) => item._id !== id));
       try {
         await removeFromWishlist(id);
@@ -37,9 +22,11 @@ export default function Wishlist({ id }) {
         console.error(err);
       }
     } else {
-      setwishlist([...wishlist, { _id: id }]); // مؤقتًا ضف id
+      setwishlist([...wishlist, { _id: id }]);
       try {
         await addToWishList(id);
+        const data = await getWishlist();
+        setwishlist(data.data);
       } catch (err) {
         console.error(err);
       }
@@ -47,14 +34,17 @@ export default function Wishlist({ id }) {
   }
 
   return (
-    <div>
+    <div onClick={wishlisttoggle} className="size-8 rounded-full bg-white border-1 border-red-400 flex items-center justify-center">
       <i
-        onClick={wishlisttoggle}
-        className={`fa-solid fa-heart cursor-pointer ${
-          wishlist.some((item) => item._id === id)
-            ? "text-red-500"
-            : "text-gray-400"
-        }`}
+        
+        className={`
+    cursor-pointer transition-transform duration-200 ease-in-out
+    ${
+      wishlist.some((item) => item.id === id)
+        ? "fa-solid fa-heart text-red-500 scale-110" // قلب ممتلئ
+        : "fa-regular fa-heart text-red-500 hover:scale-125"
+    } 
+  `}
       ></i>
     </div>
   );

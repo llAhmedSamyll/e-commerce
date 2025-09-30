@@ -51,8 +51,6 @@ export default async function productDetails({
           </span>
           <div className="flex justify-between items-center ">
             <h1 className="font-bold text-2xl p-4">{data.title}</h1>
-
-            <Wishlist id={data.id} />
           </div>
           <p className="font-mono text-teal-700  "> {data.description}</p>
           <div>
@@ -115,8 +113,11 @@ export default async function productDetails({
               <p>{new Date(data.createdAt).toLocaleDateString()}</p>
             </div>
           </div>
-          <div className="flex justify-center mt-20 ">
+          <div className="flex justify-center items-center gap-5  mt-20 ">
             <AddDetailsBtn id={data.id} />
+            <div className="mr-10 mb-19">
+              <Wishlist id={data.id} />
+            </div>
           </div>
         </div>
       </div>

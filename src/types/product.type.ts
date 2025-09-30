@@ -17,6 +17,7 @@ export interface ProductType {
   updatedAt: string
   id: string
   priceAfterDiscount : number
+  
 }
 
 export interface Subcategory {
