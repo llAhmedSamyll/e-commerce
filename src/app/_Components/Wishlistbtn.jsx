@@ -3,8 +3,8 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartCountContext";
 import getWishlist from "@/api/getWishlist";
-import { removeFromWishlist } from "../wishlist/WishListActions/removeFromWishlist";
 import { addToWishList } from "../wishlist/WishListActions/addToWishList";
+import { removeFromWishlist } from "../wishlist/WishListActions/removeFromWishlist";
 
 export default function Wishlist({ id }) {
   const data = useContext(CartContext);
