@@ -34,9 +34,11 @@ export default function Wishlist({ id }) {
   }
 
   return (
-    <div onClick={wishlisttoggle} className="size-8 rounded-full bg-white border-1 border-red-400 flex items-center justify-center">
+    <div
+      onClick={wishlisttoggle}
+      className="size-8 rounded-full bg-white border-1 border-red-400 flex items-center justify-center"
+    >
       <i
-        
         className={`
     cursor-pointer transition-transform duration-200 ease-in-out
     ${
