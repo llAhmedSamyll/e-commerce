@@ -1,14 +1,28 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartCountContext";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 export default function Cart() {
   const cart = useContext(CartContext);
   if (!cart) throw new Error("CartContext not provided");
 
-  const { products, loading, btnDisable, deleteProduct, updateProduct, clear , clearloader } =
-    cart;
+  const {
+    products,
+    loading,
+    btnDisable,
+    deleteProduct,
+    updateProduct,
+    clear,
+    clearloader,
+    cartId,
+  } = cart;
 
   const total = products.reduce((acc, it) => acc + it.price * it.count, 0);
 
@@ -22,7 +36,7 @@ export default function Cart() {
         </>
       ) : (
         <>
-          {products?.length > 0 ? ( 
+          {products?.length > 0 ? (
             <>
               <div className="max-w-6xl mx-auto p-4">
                 {/* Header */}
@@ -37,7 +51,12 @@ export default function Cart() {
                         onClick={() => clear()}
                         className="p-2 bg-red-200 hover:bg-red-300 hover:text-black cursor-pointer text-red-600 rounded-e-lg font-semibold "
                       >
-                        {clearloader? <i className="fa-solid fa-spinner fa-spin-pulse"></i> : <i className="fas fa-trash-alt"></i> } Clear Cart items
+                        {clearloader ? (
+                          <i className="fa-solid fa-spinner fa-spin-pulse"></i>
+                        ) : (
+                          <i className="fas fa-trash-alt"></i>
+                        )}{" "}
+                        Clear Cart items
                       </button>
                       <p className="text-sm text-gray-500">
                         {" "}
@@ -172,12 +191,35 @@ export default function Cart() {
                       >
                         Continue shopping
                       </Link>
-                      <button
-                        disabled={btnDisable}
-                        className="px-2 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
-                      >
-                        Proceed to Checkout
-                      </button>
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <button
+                            disabled={btnDisable}
+                            className="px-2 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
+                          >
+                            Proceed to Checkout
+                          </button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="overflow-hidden">
+                          <div className="bg-red-500 flex  ">
+                            <Link
+                              href={`/onlinecheckout/${cartId}`}
+                              className="w-1/2 flex flex-col justify-center items-center bg-blue-600 hover:bg-blue-700 text-white  p-5 "
+                            >
+                              <i className="fa-brands fa-cc-visa text-3xl text-amber-100 mb-3"></i>
+                              Pay Online
+                            </Link>
+                            <Link
+                              href="/"
+                              className="w-1/2 flex flex-col justify-center items-center bg-green-600 hover:bg-green-700 text-white   p-5"
+                            >
+                              <i className="fa-solid fa-sack-dollar text-3xl mb-3"></i>
+                              Cash on Delivery
+                            </Link>
+                          </div>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </div>
                 </div>

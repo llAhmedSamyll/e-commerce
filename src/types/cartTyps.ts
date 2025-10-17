@@ -44,6 +44,7 @@ export type CartContextType = {
   updateProduct: (id: string, count: number) => Promise<void>;
   clear: () => Promise<void>;
   clearloader: boolean;
+  cartId : string
 
   wishlist: ProductType[];
   setwishlist: React.Dispatch<React.SetStateAction<ProductType[]>>;

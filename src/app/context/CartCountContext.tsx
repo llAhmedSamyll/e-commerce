@@ -23,6 +23,7 @@ export default function CartProvider({
   const [clearloader, setclearloader] = useState(false);
   const [wishlist, setwishlist] = useState<ProductType[]>([]);
   const [wishloading, setwishloading] = useState(false);
+  const [cartId, setcartId] = useState("");
 
   async function getUserWishList() {
     setwishloading(true);
@@ -42,6 +43,7 @@ export default function CartProvider({
       const res = await getLoggedUserCart();
       if (res.status === "success") {
         setProducts(res.data.products);
+        setcartId(res.cartId);
       }
     } catch (err) {
       console.log(err);
@@ -114,7 +116,8 @@ export default function CartProvider({
         clearloader,
         wishlist,
         setwishlist,
-        wishloading
+        wishloading,
+        cartId
       }}
     >
       {children}
