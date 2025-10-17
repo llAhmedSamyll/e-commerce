@@ -12,10 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import SelectCity from "../../_Components/SelectCity";
 import { checkoutSchemaType, checkoutshcema } from "../../../schema/checkout";
-import onlinePayment from "@/chekoutActions/onlineChekOut";
 import { useParams } from "next/navigation";
+import cashPayment from "@/chekoutActions/cashChekOut";
+import toast from "react-hot-toast";
 
-export default function OnlineCheckOut() {
+export default function CashCheckOut() {
   const [loading, setloading] = useState(false);
   const [disablebtn, setdisablebtn] = useState(false);
   const { id }: { id: string } = useParams();
@@ -30,17 +31,14 @@ export default function OnlineCheckOut() {
     shouldFocusError: true,
   });
 
-  async function handelOnlinCheckOut(value: checkoutSchemaType) {
+  async function handelCashCheckOut(value: checkoutSchemaType) {
     setloading(true);
     setdisablebtn(true);
-    console.log(value);
-    const res = await onlinePayment(
-      id,
-      "https://e-commerce-v1-theta.vercel.app/",
-      value
-    );
+    const res = await cashPayment(id, value);
+
     if (res.status === "success") {
-      window.location.href = res.session.url;
+      window.location.href = "/";
+      toast.success("Successfully")
     }
   }
 
@@ -53,7 +51,7 @@ export default function OnlineCheckOut() {
               Checkout
             </h1>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handelOnlinCheckOut)}>
+              <form onSubmit={form.handleSubmit(handelCashCheckOut)}>
                 <div className="mt-12 space-y-6">
                   <SelectCity form={form} />
 

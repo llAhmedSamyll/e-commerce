@@ -195,7 +195,7 @@ export default function Cart() {
                         <AlertDialogTrigger>
                           <button
                             disabled={btnDisable}
-                            className="px-2 py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
+                            className="px-2 cursor-pointer py-2 disabled:bg-yellow-100 disabled:cursor-not-allowed rounded-md text-sm font-semibold bg-yellow-400 hover:bg-amber-400"
                           >
                             Proceed to Checkout
                           </button>
@@ -210,7 +210,7 @@ export default function Cart() {
                               Pay Online
                             </Link>
                             <Link
-                              href="/"
+                              href={`/cashcheckout/${cartId}`}
                               className="w-1/2 flex flex-col justify-center items-center bg-green-600 hover:bg-green-700 text-white   p-5"
                             >
                               <i className="fa-solid fa-sack-dollar text-3xl mb-3"></i>
