@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./_Components/Navbar";
 import Aos from "./_Components/Aos";
 import ScrollToTop from "./_Components/ScrollToTop";
+import Footer from "./_Components/Footer";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Toaster } from "react-hot-toast";
@@ -50,6 +51,7 @@ export default function RootLayout({
             {children}
           </CartProvider>
         </MySessionProvider>
+        <Footer/>
       </body>
     </html>
   );
