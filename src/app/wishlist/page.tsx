@@ -50,7 +50,7 @@ export default function Page() {
                   className="px-4 xl:w-1/2 py-2 md:px-4 md:py-2 border-b-2 xl:border-s odd:bg-teal-100 even:bg-white"
                 >
                   <div className="flex flex-col md:flex-row justify-between gap-4">
-                    <div className="xl:w-1/2 flex items-center gap-4">
+                    <div className="md:w-1/2 flex items-center gap-4">
                       <div className="w-30 h-30 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0">
                         <Image
                           width={300}
@@ -61,7 +61,7 @@ export default function Page() {
                         />
                       </div>
                       <div>
-                        <div className="text-base font-medium">
+                        <div className="text-base line-clamp-2 font-medium">
                           {list.title}
                         </div>
                         <div className="mt-3">
