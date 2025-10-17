@@ -4,13 +4,11 @@ import "./globals.css";
 import Navbar from "./_Components/Navbar";
 import Aos from "./_Components/Aos";
 import ScrollToTop from "./_Components/ScrollToTop";
-import Footer from "./_Components/Footer";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Toaster } from "react-hot-toast";
 import MySessionProvider from "@/MySessionProvider/MySessionProvider";
 import CartProvider from "./context/CartCountContext";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-                
-        <ScrollToTop/>
+        <ScrollToTop />
         <MySessionProvider>
           <CartProvider>
             <Toaster />
@@ -51,7 +48,22 @@ export default function RootLayout({
             {children}
           </CartProvider>
         </MySessionProvider>
-        <Footer/>
+
+        <footer className="  rounded-t-lg w-full  bottom-0 shadow-sm bg-gray-900 ">
+          <div className="w-full max-w-screen-xl mx-auto  py-3">
+            <span className="block text-sm text-center text-gray-400">
+              © 2025
+              <a
+                className="px-1"
+                target="_blank"
+                href="https://www.facebook.com/lAhmedSamyl"
+              >
+                Ahmed Samy™
+              </a>
+              , All Rights Reserved.
+            </span>
+          </div>
+        </footer>
       </body>
     </html>
   );
