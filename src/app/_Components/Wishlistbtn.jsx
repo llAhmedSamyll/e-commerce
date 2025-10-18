@@ -28,15 +28,17 @@ export default function Wishlist({ id }) {
     const exists = wishlist.some((item) => item._id === id);
     if (exists) {
       setwishlist(wishlist.filter((item) => item._id !== id));
+      setloading(false);
+
       try {
         await removeFromWishlist(id);
         setloading(false);
       } catch (err) {
-        console.error(err);
         setloading(false);
       }
     } else {
       setwishlist([...wishlist, { _id: id }]);
+
       try {
         await addToWishList(id);
         const data = await getWishlist();
@@ -61,7 +63,7 @@ export default function Wishlist({ id }) {
     cursor-pointer transition-transform duration-200 ease-in-out
     ${
       wishlist.some((item) => item.id === id)
-        ? "fa-solid fa-heart text-red-500 scale-110" // قلب ممتلئ
+        ? "fa-solid fa-heart text-red-500 scale-110"
         : "fa-regular fa-heart text-red-500 hover:scale-125"
     } 
   `}

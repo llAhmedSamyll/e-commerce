@@ -22,6 +22,7 @@ export default function Navbar() {
   const { products } = useContext(CartContext);
 
   const totalCount = products.reduce((acc, product) => acc + product.count, 0);
+  console.log(session);
 
 
   function logOut() {
