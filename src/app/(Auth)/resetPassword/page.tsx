@@ -32,9 +32,9 @@ export default function FrogotPass() {
       setloading(false);
       setdisablebtn(false);
       toast.error(res.message);
-    }
-    else {
-      window.location.href = "/login"
+    } else {
+      toast.success("Password changed successfully");
+      window.location.href = "/login";
     }
   }
 
