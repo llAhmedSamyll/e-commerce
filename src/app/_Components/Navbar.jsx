@@ -24,7 +24,6 @@ export default function Navbar() {
   const totalCount = products.reduce((acc, product) => acc + product.count, 0);
   console.log(session);
 
-
   function logOut() {
     signOut({ callbackUrl: "/login" });
   }
@@ -43,6 +42,14 @@ export default function Navbar() {
         {/* Right section (button + toggle) */}
         <div className="flex md:order-2 space-x-2 md:space-x-0 ">
           <div className=" flex">
+            <div className={path === "/search" ? "active" : ""}>
+              <Link
+                href="/search"
+                className="block py-2 px-3  text-md font-medium text-white rounded-sm md:bg-transparent   "
+              >
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </Link>
+            </div>
             {!session ? (
               <>
                 <Link
@@ -81,7 +88,10 @@ export default function Navbar() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="z-50" disableScrollLock>
                         <DropdownMenuItem>
-                          <Link href="/wishlist" className="font-semibold" ><i className="fa-solid fa-heart text-red-500 mr-2 "></i>Wish List</Link>
+                          <Link href="/wishlist" className="font-semibold">
+                            <i className="fa-solid fa-heart text-red-500 mr-2 "></i>
+                            Wish List
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="cursor-pointer ">
@@ -186,6 +196,7 @@ export default function Navbar() {
                 Brands
               </Link>
             </li>
+
             <li>
               {session && (
                 <span
