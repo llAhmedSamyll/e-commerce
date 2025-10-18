@@ -66,7 +66,7 @@ export default function Navbar() {
             ) : (
               <>
                 {session && (
-                  <span className="text-white  font-medium rounded-lg text-sm px-4 py-2   flex justify-center items-center ">
+                  <span className="text-white  font-medium rounded-lg text-sm pe-4 py-2   flex justify-center items-center ">
                     <DropdownMenu>
                       <DropdownMenuTrigger className="text-white flex items-center gap-1 cursor-pointer outline-none ">
                         <svg
