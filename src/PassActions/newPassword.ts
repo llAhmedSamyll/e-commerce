@@ -1,4 +1,7 @@
-export default async function newPassword(value) {
+export default async function newPassword(value: {
+  email: string;
+  newPassword: string;
+}) {
   const res = await fetch(
     "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
     {
