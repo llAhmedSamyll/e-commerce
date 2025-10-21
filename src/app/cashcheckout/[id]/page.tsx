@@ -15,9 +15,7 @@ import { checkoutSchemaType, checkoutshcema } from "../../../schema/checkout";
 import { useParams } from "next/navigation";
 import cashPayment from "@/chekoutActions/cashChekOut";
 import toast from "react-hot-toast";
-export const metadata = {
-  title: "Cash CheckOut",
-};
+
 export default function CashCheckOut() {
   const [loading, setloading] = useState(false);
   const [disablebtn, setdisablebtn] = useState(false);

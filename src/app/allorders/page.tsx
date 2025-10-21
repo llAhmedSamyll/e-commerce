@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import getAllOrders from "@/api/getAllOrders";
 import { Order } from "@/types/order";
 import Image from "next/image";
-export const metadata = {
-  title: "All Orders",
-};
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
