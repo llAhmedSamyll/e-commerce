@@ -6,9 +6,6 @@ import { CartContext } from "../context/CartCountContext";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { removeFromWishlist } from "./_WishListActions/removeFromWishlist";
-export const metadata = {
-  title: "Wish List",
-};
 export default function Page() {
   const data = useContext(CartContext);
   if (!data) return <div>Loading wishlist...</div>;
