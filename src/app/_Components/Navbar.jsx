@@ -22,7 +22,6 @@ export default function Navbar() {
   const { products } = useContext(CartContext);
 
   const totalCount = products.reduce((acc, product) => acc + product.count, 0);
-  console.log(session);
 
   function logOut() {
     signOut({ callbackUrl: "/login" });
@@ -94,7 +93,21 @@ export default function Navbar() {
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="cursor-pointer ">
+                        <DropdownMenuItem>
+                          <Link href="/allorders" className="font-semibold">
+                            <i className="fa-solid fa-truck text-teal-800  mr-2"></i>
+                            All orders
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                          <Link href="/settings" className="font-semibold">
+                            <i className="fa-solid fa-gear text-teal-800  mr-2"></i>
+                            Settings
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="cursor-pointer bg-red-100  ">
                           {session && (
                             <span
                               onClick={logOut}

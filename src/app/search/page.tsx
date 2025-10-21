@@ -7,7 +7,9 @@ import { ProductType } from "@/types/product.type";
 import { useEffect, useState } from "react";
 import AddBtn from "../_Components/AddBtn/AddBtn";
 import Wishlist from "../_Components/Wishlistbtn";
-
+export const metadata = {
+  title: "Search",
+};
 export default function AllProducts() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);

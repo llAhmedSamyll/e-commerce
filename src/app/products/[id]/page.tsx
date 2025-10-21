@@ -13,7 +13,9 @@ import getRelatedProducts from "@/ProductCategoryActions/relatedProducts";
 import AddBtn from "@/app/_Components/AddBtn/AddBtn";
 import Link from "next/link";
 import { ProductType } from "@/types/product.type";
-
+export const metadata = {
+  title: "Product Details",
+};
 export default async function productDetails({
   params,
 }: {

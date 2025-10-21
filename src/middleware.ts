@@ -13,7 +13,15 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
   } else {
-    if (request.nextUrl.pathname === "/cart" || request.nextUrl.pathname === "/wishlist" ) {
+    if (
+      request.nextUrl.pathname === "/cart" ||
+      request.nextUrl.pathname === "/wishlist" ||
+      request.nextUrl.pathname === "/allorders" ||
+      request.nextUrl.pathname === "/settings" ||
+      request.nextUrl.pathname === "/cashcheckout" ||
+      request.nextUrl.pathname.startsWith("/onlinecheckout") ||
+      request.nextUrl.pathname.startsWith("/cashcheckout")
+    ) {
       return NextResponse.redirect(new URL("/login", request.url));
     } else {
       return NextResponse.next();
@@ -22,5 +30,15 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/cart", "/login", "/register" , "/wishlist"],
+  matcher: [
+    "/cart",
+    "/login",
+    "/register",
+    "/wishlist",
+    "/allorders",
+    "/settings",
+    "/cashcheckout",
+    "/onlinecheckout/:path*",
+    "/cashcheckout/:path*",
+  ],
 };

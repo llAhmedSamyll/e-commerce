@@ -14,7 +14,9 @@ import SelectCity from "../../_Components/SelectCity";
 import { checkoutSchemaType, checkoutshcema } from "../../../schema/checkout";
 import onlinePayment from "@/chekoutActions/onlineChekOut";
 import { useParams } from "next/navigation";
-
+export const metadata = {
+  title: "Online CheckOut",
+};
 export default function OnlineCheckOut() {
   const [loading, setloading] = useState(false);
   const [disablebtn, setdisablebtn] = useState(false);

@@ -2,7 +2,9 @@ import getBrands from "@/api/getBrands";
 import { brandType } from "@/types/brandType";
 import Image from "next/image";
 import React from "react";
-
+export const metadata = {
+  title: "Brands",
+};
 export default async function Brands() {
   const { data }: { data: brandType[] } = await getBrands();
 

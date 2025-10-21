@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartCountContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,9 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+export const metadata = {
+  title: "Cart",
+};
 export default function Cart() {
   const cart = useContext(CartContext);
   if (!cart) throw new Error("CartContext not provided");

@@ -14,13 +14,16 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import SubCategory from "../_Components/SubCategory";
-
+export const metadata = {
+  title: "categories",
+};
 export default async function Categories() {
   const { data }: { data: CategoryType[] } = await getAllCategories();
 
 
   return (
     <>
+    
       <div className="container mx-auto ">
         <div className=" flex  flex-wrap justify-center p-2 ">
           {data?.map((category) => (
