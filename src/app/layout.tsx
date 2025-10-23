@@ -10,6 +10,8 @@ import MySessionProvider from "@/MySessionProvider/MySessionProvider";
 import CartProvider from "./context/CartCountContext";
 import Footer from "./_Components/Footer";
 import Upbutton from "./_Components/Upbutton";
+import SplashLayout from "./_Components/SplashLayout";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,21 +38,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <ScrollToTop />
-        <MySessionProvider>
-          <CartProvider>
-            <Toaster />
-            <Aos />
+        {" "}
+        <SplashLayout>
+          <ScrollToTop />
+          <MySessionProvider>
+            <CartProvider>
+              <Toaster />
+              <Aos />
 
-            <div>
-              <Navbar />
-            </div>
-            <div className="mt-20"></div>
-            <main className="min-h-[100vh]"> {children}</main>
-          </CartProvider>
-        </MySessionProvider>
-        <Upbutton />
-        <Footer />
+              <div>
+                <Navbar />
+              </div>
+              <div className="mt-20"></div>
+              <main className="min-h-[100vh]"> {children}</main>
+            </CartProvider>
+          </MySessionProvider>
+          <Upbutton />
+          <Footer />
+        </SplashLayout>
       </body>
     </html>
   );
